@@ -1,0 +1,39 @@
+:global(.ant-switch) {
+  max-width: 36px;
+  height: 16px;
+  width: 16px;
+  &:after {
+    top: 0;
+    height: 14px;
+    width: 14px;
+  }
+  &:global(.ant-switch-checked) {
+    background-color: #0050c8;
+  }
+}
+.row {
+  width: 100%;
+  border: 1px solid lightgray;
+  border-radius: 8px;
+  padding: 16px;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    :global(.ant-typography) {
+      margin: 0;
+    }
+  }
+
+
+  .switch {
+    width: 100%;
+    height: 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .btn {}
+  }
+}

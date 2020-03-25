@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-  <React.StrictMode>
+    <div style={{ background: '#f1f2f5', height: '100vh'}}>
     <App />
-  </React.StrictMode>,
+    </div>,
   document.getElementById('root')
 );
 

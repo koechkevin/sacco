@@ -1,0 +1,36 @@
+.login {
+  &:global(.ant-row) {
+    padding: 24px;
+    width: 320px;
+    margin: auto;
+    border-radius: 8px;
+    border: 1px solid lightgrey;
+    h4 {
+      text-align: center;
+      width: 100%;
+    }
+    .input {
+      border-radius: 4px;
+    }
+  }
+}
+
+.button {
+  &:global(.ant-btn) {
+    background-color: #0050c8;
+    border-radius: 4px;
+    margin-top: 16px;
+    width: 100%;
+  }
+}
+.div {
+  padding-top: 15%;
+}
+
+.error{
+  width: 100%;
+  color: red;
+  font-size: 12px;
+  height: 16px;
+  padding-left: 8px;
+}

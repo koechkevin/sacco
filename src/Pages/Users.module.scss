@@ -1,0 +1,50 @@
+.item {
+  width: 100%;
+  padding: 8px;
+}
+.list {
+  width: 100%;
+  border-radius: 8px;
+}
+
+:global(.ant-list-split .ant-list-item){
+  border-bottom: 1px solid lightgray;
+}
+
+.top {
+  border: 1px solid lightgray;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+}
+
+.row {
+  width: 100%;
+  border: 1px solid lightgray;
+  border-radius: 8px;
+  padding: 16px;
+  .formHead {
+    padding-right: 16px;
+    :global(.ant-col) {
+      height: 40px;
+      display: flex;
+      align-items: center;
+      &:global(.ant-col-6) {
+        justify-content: flex-end;
+      }
+    }
+  }
+}
+
+.listRow {
+  width: 100%;
+  border: 1px solid lightgray;
+  border-radius: 8px;
+  min-height: 400px;
+  max-height: calc(100vh - 194px);
+  overflow-y: auto;
+}
