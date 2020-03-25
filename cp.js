@@ -18,10 +18,11 @@ const data = {
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
+    "outDir":"dist",
     "jsx": "react"
   },
   "include": [
-    "src"
+    "src", "api"
   ]
 }
 fs.writeFile('tsconfig.json', JSON.stringify(data), (err) => { if (err) throw err;});
