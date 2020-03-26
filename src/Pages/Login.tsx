@@ -1,4 +1,4 @@
-import React, { FC, useContext, useEffect, useState } from 'react';
+import React, { FC, useContext,useState } from 'react';
 
 import styles from './Login.module.scss';
 import { Button, Input, notification, Row, Typography } from 'antd';

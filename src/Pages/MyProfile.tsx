@@ -1,7 +1,6 @@
 import React, { FC, useContext, useState } from 'react';
 import { Button, Col, Input, Row, Typography } from 'antd';
 import { AppContext } from '../Context/AppContext';
-import { Redirect } from 'react-router';
 import styles from './MyProfile.module.scss';
 import Icon from '../components/Icon';
 import { faPencilAlt } from '@fortawesome/pro-regular-svg-icons';

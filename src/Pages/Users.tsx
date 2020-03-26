@@ -3,30 +3,15 @@ import { Row, List, Avatar, Typography, Button } from 'antd';
 import { AppContext } from '../Context/AppContext';
 import { UserOutlined } from '@ant-design/icons';
 import styles from './Users.module.scss';
-import { Link, Redirect } from 'react-router-dom';
-import useLayout from '../Hooks/useLayout';
-import Exception from './Exceptions/Exception';
+import { Link } from 'react-router-dom';
 import Loader from '../components/Loader';
 
 const { Text } = Typography;
 
 const Users: FC<any> = () => {
   const {
-    state: {
-      users,
-      user,
-      usersLoading,
-      auth: { isLoggedIn },
-    },
+    state: { users, usersLoading },
   } = useContext(AppContext);
-
-  if (!isLoggedIn) {
-    return <Redirect to="/" />;
-  }
-
-  if (user.role !== 'admin') {
-    return <Exception exception={403} text="You are not authorized to access this page" />;
-  }
 
   return (
     <Row>

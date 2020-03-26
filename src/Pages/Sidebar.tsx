@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom';
 const { Sider } = Layout;
 const { Text } = Typography;
 
-const ChildrenSideBar: FC<any> = (props) => {
+const ChildrenSideBar: FC<any> = () => {
   const {
     state: { user },
   } = useContext(AppContext);
