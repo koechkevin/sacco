@@ -19,7 +19,7 @@ const useLayout = (show: boolean) => {
         }
       }
     } else {
-      if (!showLayout) {
+      if (showLayout) {
         dispatch && dispatch({ showLayout: false, })
       }
     }

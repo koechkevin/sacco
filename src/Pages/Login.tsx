@@ -11,7 +11,7 @@ const { Title, Text } = Typography;
 const Login: FC<any> = () => {
   const {
     dispatch,
-    state: { showLayout, auth },
+    state: { auth },
   } = useContext(AppContext);
   const [error, setError] = useState(false);
   const [credentials, setCredentials] = useState({
@@ -20,14 +20,6 @@ const Login: FC<any> = () => {
   });
 
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    if (dispatch && showLayout) {
-      dispatch({
-        showLayout: false,
-      });
-    }
-  }, [dispatch, showLayout]);
 
   const onChange = (e: any) => {
     e.persist();
@@ -38,12 +30,13 @@ const Login: FC<any> = () => {
     setLoading(true);
     try {
       const response = await api.post('/auth/login', credentials);
+      setLoading(false);
       localStorage.setItem(constants.AUTH_KEY_TOKEN, response.data.token);
       dispatch && dispatch({ currentUserRole: response.data.role });
     } catch (error) {
+      setLoading(false);
       setError(true);
     }
-    setLoading(false);
   };
 
   const onRequestPassword = async () => {

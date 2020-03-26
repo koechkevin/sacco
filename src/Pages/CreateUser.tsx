@@ -1,6 +1,5 @@
-import React, { FC, useContext, useState } from 'react';
-import { Col, Row, Switch, Typography } from 'antd';
-import useLayout from '../Hooks/useLayout';
+import React, { FC, useState } from 'react';
+import { Col, notification, Row, Switch, Typography } from 'antd';
 
 import styles from './Users.module.scss';
 import Icon from '../components/Icon';
@@ -9,9 +8,6 @@ import { Form } from './MyProfile';
 import Title from 'antd/lib/typography/Title';
 import { api } from '../services/api';
 import moment from 'moment';
-import Exception from './Exceptions/Exception';
-import { AppContext } from '../Context/AppContext';
-import { Redirect } from 'react-router-dom';
 
 const { Text } = Typography;
 const CreateUser: FC<any> = (props) => {
@@ -21,7 +17,6 @@ const CreateUser: FC<any> = (props) => {
   const {
     history: { goBack },
   } = props;
-  useLayout(true);
 
   const onChangeDates = (name: 'month' | 'year') => (e: any) => {
     const contributionMonth = moment(user.firstContributionDate).format('MMMM');
@@ -46,25 +41,13 @@ const CreateUser: FC<any> = (props) => {
   };
   const formAction = async (data: any) => {
     if (user.idNumber && user.firstContributionDate) {
-      try {
-        await api.post('/auth/admin/users', data);
-      } catch (e) {}
+        return await api.post('/auth/admin/users', data);
     }
   };
 
   const [loading, setLoading] = useState(false);
   const [sendLink, setSendLink] = useState(false);
 
-  const {
-    state: { user: currentUser, auth },
-  } = useContext(AppContext);
-
-  if(!auth.isLoggedIn) {
-    return <Redirect to="/" />
-  }
-  if (currentUser.role !== 'admin') {
-    return <Exception exception={403} text="You are not authorized to access this page" />;
-  }
   return (
     <Row>
       <Row className={styles.top}>
@@ -104,9 +87,12 @@ const CreateUser: FC<any> = (props) => {
               if (sendLink) {
                 api.post('/auth/users/request-password', { idNumber: user.idNumber }).then();
               }
-              setUser({});
+              setUser({firstContributionDate: moment().format()});
               setLoading(false);
-            });
+            }).catch(() => {
+              setLoading(false);
+              notification.error({ message: 'An error occurred. Your request was not completed!. Try again'})
+            })
           }}
         />
       </div>

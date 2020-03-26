@@ -12,6 +12,7 @@ export interface State {
     role?: string;
   }
   user: any;
+  usersLoading: boolean;
 }
 export interface Context {
   state: State,
@@ -28,5 +29,6 @@ export const AppContext = createContext<Context>({
     },
     user: {},
     users: [],
+    usersLoading: false,
   }, dispatch: undefined,
 });

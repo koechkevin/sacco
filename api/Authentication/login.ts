@@ -10,11 +10,19 @@ export const authenticate = async (req: any, res: any, next: () => void) => {
     const authorization = req.headers.authorization;
     const secret = process.env.SECRET_KEY || 'secret key';
     const decoded: any = verify(authorization, secret);
-    req.user = decoded.data;
+    const { data } = decoded;
+    if (data.idNumber) {
+      const ref = database.ref(`/users/${data.idNumber}/role`);
+      const snap = await ref.once('value');
+      const value = snap.val();
+      req.user = decoded.data;
+      req.user.role = value;
+      return next();
+    }
+    return res.status(401).json({ message: 'invalid token'});
   } catch (error) {
     return res.status(401).json({ message: 'invalid token'});
   }
-  next();
 };
 
 export const allowRoles = (roles: string[]) => async (req: any, res: any, next: () => void) => {

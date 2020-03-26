@@ -14,7 +14,7 @@ import useLayout from '../Hooks/useLayout';
 const { Title, Text } = Typography;
 export const View: FC<any> = (props) => {
   const { user } = props;
-  const monthlyContribution = +user.monthlyContribution || 0.00;
+  const monthlyContribution = +user.monthlyContribution || 0.0;
   return (
     <Row className={styles.view} style={{ width: '100%' }} gutter={16}>
       <Col style={{ display: 'flex', flexDirection: 'column', marginBottom: 16 }} xs={24} sm={12}>
@@ -55,7 +55,9 @@ export const View: FC<any> = (props) => {
 
 export const Form: FC<any> = (props) => {
   const { user, onFinish, onChangeValues, onChangeDates, formAction, disabled, loading } = props;
-  const { state: { user: currentUser}} = useContext(AppContext);
+  const {
+    state: { user: currentUser },
+  } = useContext(AppContext);
   const months = [
     'January',
     'February',
@@ -86,7 +88,13 @@ export const Form: FC<any> = (props) => {
         sm={12}
       >
         <Text className={styles.label}>First Name</Text>
-        <Input onBlur={formAction} onChange={onChangeValues} name="firstName" value={user.firstName} className={styles.input} />
+        <Input
+          onBlur={formAction}
+          onChange={onChangeValues}
+          name="firstName"
+          value={user.firstName}
+          className={styles.input}
+        />
       </Col>
       <Col
         style={{ display: 'flex', flexDirection: 'column', marginBottom: 16, ...(isMobile && colStyles) }}
@@ -94,7 +102,13 @@ export const Form: FC<any> = (props) => {
         sm={12}
       >
         <Text className={styles.label}>Last Name</Text>
-        <Input onBlur={formAction} onChange={onChangeValues} name="lastName" value={user.lastName} className={styles.input} />
+        <Input
+          onBlur={formAction}
+          onChange={onChangeValues}
+          name="lastName"
+          value={user.lastName}
+          className={styles.input}
+        />
       </Col>
       <Col
         style={{ display: 'flex', flexDirection: 'column', marginBottom: 16, ...(isMobile && colStyles) }}
@@ -102,7 +116,13 @@ export const Form: FC<any> = (props) => {
         sm={12}
       >
         <Text className={styles.label}>Id Number</Text>
-        <Input disabled={disabled} onChange={onChangeValues} name="idNumber" value={user.idNumber} className={styles.input} />
+        <Input
+          disabled={disabled}
+          onChange={onChangeValues}
+          name="idNumber"
+          value={user.idNumber}
+          className={styles.input}
+        />
       </Col>
       <Col
         style={{ display: 'flex', flexDirection: 'column', marginBottom: 16, ...(isMobile && colStyles) }}
@@ -110,7 +130,13 @@ export const Form: FC<any> = (props) => {
         sm={12}
       >
         <Text className={styles.label}>PF Number</Text>
-        <Input disabled={disabled} onChange={onChangeValues} name="pfNumber" value={user.pfNumber} className={styles.input} />
+        <Input
+          disabled={disabled}
+          onChange={onChangeValues}
+          name="pfNumber"
+          value={user.pfNumber}
+          className={styles.input}
+        />
       </Col>
       <Col
         style={{ display: 'flex', flexDirection: 'column', marginBottom: 16, ...(isMobile && colStyles) }}
@@ -201,7 +227,7 @@ export const Form: FC<any> = (props) => {
 const MyProfile: FC<any> = () => {
   const {
     dispatch,
-    state: { auth, user },
+    state: { user },
   } = useContext(AppContext);
   const [editing, setEditing] = useState(false);
   useLayout(true);
@@ -214,7 +240,7 @@ const MyProfile: FC<any> = () => {
   const formAction = async (data: any) => {
     try {
       await api.put('/auth/users/my-profile', data);
-    } catch(e) {}
+    } catch (e) {}
   };
 
   const onChangeDates = (name: 'month' | 'year') => (e: any) => {
@@ -229,12 +255,9 @@ const MyProfile: FC<any> = () => {
       newDate = moment(`28/${contributionMonth}/${e.target.value}`, 'DD/MMMM/YYYY').format();
     }
     dispatch && dispatch({ user: { ...user, firstContributionDate: newDate } });
-    formAction({...user, firstContributionDate: newDate}).then()
+    formAction({ ...user, firstContributionDate: newDate }).then();
   };
 
-  if (!auth.isLoggedIn) {
-    return <Redirect to="/" />;
-  }
   return (
     <Row className={styles.profile}>
       <Col className={styles.header}>
@@ -248,11 +271,11 @@ const MyProfile: FC<any> = () => {
           disabled
           onChangeDates={onChangeDates}
           onChangeValues={onChangeValues}
-          formAction={() => formAction({...user})}
+          formAction={() => formAction({ ...user })}
           user={user}
           onFinish={() => {
             setEditing(false);
-            formAction({...user}).then();
+            formAction({ ...user }).then();
           }}
         />
       )}

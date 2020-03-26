@@ -6,6 +6,7 @@ import styles from './Users.module.scss';
 import { Link, Redirect } from 'react-router-dom';
 import useLayout from '../Hooks/useLayout';
 import Exception from './Exceptions/Exception';
+import Loader from '../components/Loader';
 
 const { Text } = Typography;
 
@@ -14,11 +15,10 @@ const Users: FC<any> = () => {
     state: {
       users,
       user,
+      usersLoading,
       auth: { isLoggedIn },
     },
   } = useContext(AppContext);
-
-  useLayout(true);
 
   if (!isLoggedIn) {
     return <Redirect to="/" />;
@@ -39,28 +39,31 @@ const Users: FC<any> = () => {
         </div>
       </Row>
       <Row className={styles.listRow}>
-        <List
-          dataSource={users}
-          className={styles.list}
-          renderItem={(item: any) => (
-            <List.Item className={styles.item}>
-              <List.Item.Meta
-                avatar={<Avatar icon={<UserOutlined />} />}
-                title={
-                  <Link to={`/admin/users/${item.idNumber}`}>
-                    <Text style={{ color: '#1d1d1d' }}>{`${item.firstName} ${item.lastName}`}</Text>
-                  </Link>
-                }
-                description={
-                  <div style={{ display: 'flex' }}>
-                    <Text>{item.email}</Text>
-                  </div>
-                }
-              />
-              {/*<Button style={{ borderRadius: 8, borderColor: '#0050c8', color: '#0050c8' }}>Reset Password</Button>*/}
-            </List.Item>
-          )}
-        />
+        {usersLoading ? (
+          <Loader />
+        ) : (
+          <List
+            dataSource={users}
+            className={styles.list}
+            renderItem={(item: any) => (
+              <List.Item className={styles.item}>
+                <List.Item.Meta
+                  avatar={<Avatar icon={<UserOutlined />} />}
+                  title={
+                    <Link to={`/admin/users/${item.idNumber}`}>
+                      <Text style={{ color: '#1d1d1d' }}>{`${item.firstName} ${item.lastName}`}</Text>
+                    </Link>
+                  }
+                  description={
+                    <div style={{ display: 'flex' }}>
+                      <Text>{item.email}</Text>
+                    </div>
+                  }
+                />
+              </List.Item>
+            )}
+          />
+        )}
       </Row>
     </Row>
   );

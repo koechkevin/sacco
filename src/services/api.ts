@@ -3,7 +3,7 @@ import constants from '../Context/constants';
 
 const environment = process.env.NODE_ENV;
 
-export const baseUrl = environment === 'development' ? 'https://nh-sacco.herokuapp.com'
+export const baseUrl = environment === 'development' ? 'http://localhost:5000'
   :'';
 
 
