@@ -30,6 +30,10 @@ export const View: FC<any> = (props) => {
         <Text className={styles.field}>{user.idNumber}</Text>
       </Col>
       <Col style={{ display: 'flex', flexDirection: 'column', marginBottom: 16 }} xs={24} sm={12}>
+        <Text className={styles.label}>PF Number</Text>
+        <Text className={styles.field}>{user.pfNumber}</Text>
+      </Col>
+      <Col style={{ display: 'flex', flexDirection: 'column', marginBottom: 16 }} xs={24} sm={12}>
         <Text className={styles.label}>Email</Text>
         <Text className={styles.field}>{user.email}</Text>
       </Col>
@@ -99,6 +103,14 @@ export const Form: FC<any> = (props) => {
       >
         <Text className={styles.label}>Id Number</Text>
         <Input disabled={disabled} onChange={onChangeValues} name="idNumber" value={user.idNumber} className={styles.input} />
+      </Col>
+      <Col
+        style={{ display: 'flex', flexDirection: 'column', marginBottom: 16, ...(isMobile && colStyles) }}
+        xs={24}
+        sm={12}
+      >
+        <Text className={styles.label}>PF Number</Text>
+        <Input disabled={disabled} onChange={onChangeValues} name="pfNumber" value={user.pfNumber} className={styles.input} />
       </Col>
       <Col
         style={{ display: 'flex', flexDirection: 'column', marginBottom: 16, ...(isMobile && colStyles) }}

@@ -14,61 +14,64 @@ const { Sider } = Layout;
 const { Text } = Typography;
 
 const ChildrenSideBar: FC<any> = (props) => {
-  const {state: {user}} = useContext(AppContext);
-  return <div className={styles.children}>
-    <div className={styles.brand}>
-      <Title level={4}>
-       Sacco
-      </Title>
-    </div>
+  const {
+    state: { user },
+  } = useContext(AppContext);
+  return (
+    <div className={styles.children}>
+      <div className={styles.brand}>
+        <Title level={4}>Sacco</Title>
+      </div>
 
-    <div className={styles.homeLink}>
-      <Icon icon={faHomeAlt} color="lightgray" />
-      <Text>My contributions</Text>
-    </div>
+      <div className={styles.homeLink}>
+        <Icon icon={faHomeAlt} color="lightgray" />
+        <Link to="/">
+          <Text>My contributions</Text>
+        </Link>
+      </div>
 
-    <Menu
-      className={styles.settings}
-      overflowedIndicator={<Icon color="lightgray" icon={faCog}/>}
-      theme="dark"
-      defaultOpenKeys={['settings']}
-      mode="inline">
-      <SubMenu key="settings" title={
-        <div className={[styles.homeLink].join(' ')}>
-        <Icon color="lightgray" icon={faCog}/>
-          <Text>Settings</Text>
-        </div>
-      }
+      <Menu
+        className={styles.settings}
+        overflowedIndicator={<Icon color="lightgray" icon={faCog} />}
+        theme="dark"
+        defaultOpenKeys={['settings']}
+        mode="inline"
       >
-        <Menu.Item className={styles.item}>
-        <Link to="/my-profile">My Profile</Link>
-        </Menu.Item>
-        {user.role === 'admin' && <Menu.Item className={styles.item}>
-          <Link to="/admin/users">
-          Manage Users
-          </Link>
-        </Menu.Item>}
-        {user.role === 'admin' && <Menu.Item className={styles.item}>
-          <Link to="/admin/users/create">
-            Add a contributor
-          </Link>
-        </Menu.Item>}
-      </SubMenu>
-    </Menu>
-    <div className={styles.footer}>
-      <div>
-        <a href="https://my-resume-92231.firebaseapp.com/koechkevin">
-          powered by Awesome Dev
-        </a>
-      </div>
-      <div style={{ textAlign: 'center'}}>
-        &copy; 2020
+        <SubMenu
+          key="settings"
+          title={
+            <div className={[styles.homeLink].join(' ')}>
+              <Icon color="lightgray" icon={faCog} />
+              <Text>Settings</Text>
+            </div>
+          }
+        >
+          <Menu.Item className={styles.item}>
+            <Link to="/my-profile">My Profile</Link>
+          </Menu.Item>
+          {user.role === 'admin' && (
+            <Menu.Item className={styles.item}>
+              <Link to="/admin/users">Manage Users</Link>
+            </Menu.Item>
+          )}
+          {user.role === 'admin' && (
+            <Menu.Item className={styles.item}>
+              <Link to="/admin/users/create">Add a contributor</Link>
+            </Menu.Item>
+          )}
+        </SubMenu>
+      </Menu>
+      <div className={styles.footer}>
+        <div>
+          <a href="https://my-resume-92231.firebaseapp.com/koechkevin">powered by Awesome Dev</a>
+        </div>
+        <div style={{ textAlign: 'center' }}>&copy; 2020</div>
       </div>
     </div>
-  </div>
-}
+  );
+};
 const Sidebar: FC<any> = (props) => {
-  const { dispatch, state} = useContext(AppContext);
+  const { dispatch, state } = useContext(AppContext);
   const { drawerOpen } = state;
   const isMobile: boolean = useMedia('(max-width:575px)');
   return (
@@ -91,7 +94,8 @@ const Sidebar: FC<any> = (props) => {
           <ChildrenSideBar {...props} />
         </Drawer>
       )}
-      </>)
-}
+    </>
+  );
+};
 
 export default Sidebar;
